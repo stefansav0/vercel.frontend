@@ -25,7 +25,7 @@ const AdminAnswerKeys = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this answer key?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/answer-keys/${id}`, {
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/answer-keys/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

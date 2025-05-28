@@ -25,7 +25,7 @@ const AdminResults = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this result?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/results/${id}`, {
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/results/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

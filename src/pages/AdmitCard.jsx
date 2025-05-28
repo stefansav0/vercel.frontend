@@ -14,7 +14,7 @@ function AdmitCard() {
   const fetchAdmitCards = async (page) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/admit-cards?page=${page}`);
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/admit-cards?page=${page}`);
       const data = await res.json();
 
       setAdmitCards((prev) => {

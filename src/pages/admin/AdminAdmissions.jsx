@@ -8,7 +8,7 @@ const AdminAdmissions = () => {
 
   const fetchAdmissions = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admissions");
+      const res = await fetch("https://vercel-backend-66m8.onrender.com/api/admissions");
       const data = await res.json();
       if (res.ok) {
         setAdmissions(data.admissions || []);

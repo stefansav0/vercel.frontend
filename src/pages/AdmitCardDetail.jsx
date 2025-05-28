@@ -8,7 +8,7 @@ const AdmitCardDetail = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/admit-cards/${slug}`)
+    fetch(`https://vercel-backend-66m8.onrender.com/api/admit-cards/${slug}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.slug) {

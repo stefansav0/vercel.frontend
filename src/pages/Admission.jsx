@@ -14,7 +14,7 @@ function Admission() {
   const fetchAdmissions = async (page) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/admissions?page=${page}`);
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/admissions?page=${page}`);
       const data = await res.json();
 
       setAdmissions((prev) => {

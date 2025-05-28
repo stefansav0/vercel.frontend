@@ -18,7 +18,7 @@ const JobDetail = () => {
 
     const fetchJobDetail = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/jobs/slug/${slug}`);
+        const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/jobs/slug/${slug}`);
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.message || "Failed to fetch job details.");

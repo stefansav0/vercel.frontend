@@ -17,7 +17,7 @@ const Jobs = () => {
   const fetchJobs = async (pageToFetch = 1, replace = false) => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/jobs?page=${pageToFetch}`);
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/jobs?page=${pageToFetch}`);
       const data = await res.json();
 
       const newJobs = Array.isArray(data.jobs) ? data.jobs : [];

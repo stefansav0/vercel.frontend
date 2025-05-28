@@ -13,7 +13,7 @@ function Result() {
 
   const fetchResults = (page) => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/results?page=${page}`)
+    fetch(`https://vercel-backend-66m8.onrender.com/api/results?page=${page}`)
       .then((res) => res.json())
       .then((data) => {
         setResults((prev) => {

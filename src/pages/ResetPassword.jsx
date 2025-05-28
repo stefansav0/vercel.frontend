@@ -16,7 +16,7 @@ const ResetPassword = () => {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/reset-password', form);
+      const res = await axios.post('https://vercel-backend-66m8.onrender.com/api/auth/reset-password', form);
       setMessage(res.data.message);
       setSuccess(true);
       setForm({ email: '', otp: '', newPassword: '' });

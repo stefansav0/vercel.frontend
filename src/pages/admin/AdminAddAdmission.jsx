@@ -58,7 +58,7 @@ const AdminAddAdmission = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/admissions", formData);
+      const res = await axios.post("https://vercel-backend-66m8.onrender.com/api/admissions", formData);
       alert("✅ Admission added successfully!");
       setFormData(initialState);
       console.log(res.data);

@@ -25,7 +25,7 @@ const AdminAdmitCards = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this admit card?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admit-cards/${id}`, {
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/admit-cards/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

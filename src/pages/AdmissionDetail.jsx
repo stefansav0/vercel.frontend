@@ -10,7 +10,7 @@ const AdmissionDetail = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/admissions/${slug}`)
+    fetch(`https://vercel-backend-66m8.onrender.com/api/admissions/${slug}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data._id) {

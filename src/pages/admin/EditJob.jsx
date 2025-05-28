@@ -43,7 +43,7 @@ const EditJob = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`http://localhost:5000/api/jobs/${id}`, {
+    const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/jobs/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

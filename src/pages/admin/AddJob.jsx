@@ -90,7 +90,7 @@ export default function AddJob() {
     console.log("Submitting job data:", cleanedJobData);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/jobs", cleanedJobData);
+      const res = await axios.post("https://vercel-backend-66m8.onrender.com/api/jobs", cleanedJobData);
       alert("✅ Job added successfully!");
       console.log("Submitted:", res.data);
       setJobData(initialState);

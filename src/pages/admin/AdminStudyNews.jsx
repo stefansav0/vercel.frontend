@@ -8,7 +8,7 @@ const AdminStudyNews = () => {
 
   const fetchStudyNews = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/study-news");
+      const res = await fetch("https://vercel-backend-66m8.onrender.com/api/study-news");
       const data = await res.json();
       if (res.ok) {
         setNewsList(data.news || []);

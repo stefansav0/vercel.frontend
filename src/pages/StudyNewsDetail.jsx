@@ -20,7 +20,7 @@ export default function StudyNewsDetail() {
     const fetchNews = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/study-news/slug/${slug}`
+          `https://vercel-backend-66m8.onrender.com/api/study-news/slug/${slug}`
         );
         setNews(res.data);
         setLoading(false);

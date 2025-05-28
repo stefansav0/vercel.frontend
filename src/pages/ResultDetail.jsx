@@ -8,7 +8,7 @@ const ResultDetail = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/results/${slug}`)
+    fetch(`https://vercel-backend-66m8.onrender.com/api/results/${slug}`)
       .then(res => res.json())
       .then(data => {
         if (data && data.slug) {

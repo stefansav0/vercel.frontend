@@ -15,7 +15,8 @@ const Home = () => {
   useEffect(() => {
     const getJobs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/jobs/latest");
+        const response = await fetch("https://vercel-backend-66m8.onrender.com/api/jobs/latest");
+
         const data = await response.json();
         if (data.success && Array.isArray(data.jobs)) {
           setJobListings(data.jobs);

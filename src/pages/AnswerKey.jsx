@@ -14,7 +14,7 @@ function AnswerKeyList() {
   const fetchAnswerKeys = async (page) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/answer-keys?page=${page}`);
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/answer-keys?page=${page}`);
       const data = await res.json();
 
       setAnswerKeys((prev) => {

@@ -74,7 +74,7 @@ const AdminAddAdmitCard = () => {
         );
         alert("✅ Admit Card updated!");
       } else {
-        await axios.post("http://localhost:5000/api/admit-cards", formData);
+        await axios.post("https://vercel-backend-66m8.onrender.com/api/admit-cards", formData);
         alert("✅ Admit Card created!");
       }
       navigate("/admin/dashboard");

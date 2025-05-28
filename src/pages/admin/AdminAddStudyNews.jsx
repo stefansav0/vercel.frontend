@@ -30,7 +30,7 @@ export default function AdminAddStudyNews() {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/study-news", news);
+      await axios.post("https://vercel-backend-66m8.onrender.com/api/study-news", news);
       alert("✅ Study news posted successfully!");
       setNews(initialState);
     } catch (error) {

@@ -8,7 +8,7 @@ const AdminJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/jobs");
+      const res = await fetch("https://vercel-backend-66m8.onrender.com/api/jobs");
       const data = await res.json();
       if (res.ok) {
         setJobs(data.jobs || []);

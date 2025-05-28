@@ -53,7 +53,7 @@ const AdminAddResult = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/results", form);
+      await axios.post("https://vercel-backend-66m8.onrender.com/api/results", form);
       alert("Result added successfully!");
       setForm({
         title: "",

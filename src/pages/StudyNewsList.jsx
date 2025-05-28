@@ -7,7 +7,7 @@ const StudyNewsList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/study-news")
+    fetch("https://vercel-backend-66m8.onrender.com/api/study-news")
       .then((res) => res.json())
       .then((data) => {
         console.log("API response:", data);
