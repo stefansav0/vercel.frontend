@@ -25,7 +25,7 @@ const AdminStudyNews = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this news item?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/study-news/${id}`, {
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/study-news/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

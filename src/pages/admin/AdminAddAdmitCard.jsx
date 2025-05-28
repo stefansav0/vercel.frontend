@@ -39,7 +39,7 @@ const AdminAddAdmitCard = () => {
     if (!isEdit) return;
 
     axios
-      .get(`http://localhost:5000/api/admit-cards/${slug}`)
+      .get(`https://vercel-backend-66m8.onrender.com/api/admit-cards/${slug}`)
       .then((res) => {
         if (res.data) {
           setFormData(res.data);
@@ -69,7 +69,7 @@ const AdminAddAdmitCard = () => {
     try {
       if (isEdit) {
         await axios.put(
-          `http://localhost:5000/api/admit-cards/${slug}`,
+          `https://vercel-backend-66m8.onrender.com/api/admit-cards/${slug}`,
           formData
         );
         alert("✅ Admit Card updated!");

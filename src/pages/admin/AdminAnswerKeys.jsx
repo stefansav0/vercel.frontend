@@ -8,7 +8,7 @@ const AdminAnswerKeys = () => {
 
   const fetchAnswerKeys = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/answer-keys");
+      const res = await fetch("https://vercel-backend-66m8.onrender.com/api/answer-keys");
       const data = await res.json();
       if (res.ok) {
         setKeys(data.answerKeys || []);

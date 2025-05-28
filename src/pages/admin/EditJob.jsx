@@ -13,7 +13,7 @@ const EditJob = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/jobs/${id}`);
+        const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/jobs/${id}`);
         const data = await res.json();
         setFormData(data);
       } catch (err) {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // ✅ Set Backend API URL with a proper fallback
-const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://vercel-backend-66m8.onrender.com";
 const API_URL = new URL("/api/jobs", BASE_URL).toString();
 
 /**

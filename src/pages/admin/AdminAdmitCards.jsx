@@ -8,7 +8,7 @@ const AdminAdmitCards = () => {
 
   const fetchCards = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admit-cards");
+      const res = await fetch("https://vercel-backend-66m8.onrender.com/api/admit-cards");
       const data = await res.json();
       if (res.ok) {
         setCards(data.admitCards || []);

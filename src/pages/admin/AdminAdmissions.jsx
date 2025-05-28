@@ -25,7 +25,7 @@ const AdminAdmissions = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this admission notice?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admissions/${id}`, {
+      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/admissions/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

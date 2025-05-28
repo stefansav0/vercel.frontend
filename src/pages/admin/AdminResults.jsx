@@ -8,7 +8,7 @@ const AdminResults = () => {
 
   const fetchResults = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/results");
+      const res = await fetch("https://vercel-backend-66m8.onrender.com/api/results");
       const data = await res.json();
       if (res.ok) {
         setResults(data.results || []);
