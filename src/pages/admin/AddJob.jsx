@@ -115,7 +115,7 @@ export default function AddJob() {
         />
         <button
           onClick={() => {
-            if (secret === import.meta.env.VITE_ADMIN_SECRET) {
+            if (secret === "mychudail") {
               setAuth(true);
             } else {
               alert("❌ Wrong secret");

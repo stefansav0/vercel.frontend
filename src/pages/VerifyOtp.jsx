@@ -14,7 +14,7 @@ const VerifyOtp = () => {
   const handleVerifyOtp = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verify-otp`, {
+      const res = await axios.post(`https://vercel-backend-66m8.onrender.com/api/auth/verify-otp`, {
         email,
         otp,
       });
