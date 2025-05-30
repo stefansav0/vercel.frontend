@@ -24,6 +24,9 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
+      // Dispatch login event to update components like Navbar
+      window.dispatchEvent(new Event("userLoggedIn"));
+
       alert("Login Successful!");
       navigate("/");
     } catch (err) {
@@ -35,9 +38,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-md">
         <h2 className="text-3xl font-semibold text-center mb-6">Login</h2>
-        {error && (
-          <p className="text-red-500 text-center mb-4">{error}</p>
-        )}
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block mb-1 font-medium">Email:</label>

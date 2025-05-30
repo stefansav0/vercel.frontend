@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { Search } from "lucide-react";
 import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
@@ -9,14 +8,15 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // Function to load user from token
+  const loadUserFromToken = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
       try {
         const decoded = jwtDecode(token);
         if (decoded.exp * 1000 < Date.now()) {
-          handleLogout();
+          handleLogout(); // Token expired
         } else {
           setUser(decoded);
         }
@@ -24,13 +24,30 @@ const Navbar = () => {
         console.error("Invalid token", error);
         handleLogout();
       }
+    } else {
+      setUser(null);
     }
+  };
+
+  // Initial token check
+  useEffect(() => {
+    loadUserFromToken();
+
+    // Listen for custom login events
+    window.addEventListener("userLoggedIn", loadUserFromToken);
+    window.addEventListener("userLoggedOut", () => setUser(null));
+
+    return () => {
+      window.removeEventListener("userLoggedIn", loadUserFromToken);
+      window.removeEventListener("userLoggedOut", () => setUser(null));
+    };
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
+    window.dispatchEvent(new Event("userLoggedOut")); // Notify others
     navigate("/login");
   };
 
@@ -43,13 +60,11 @@ const Navbar = () => {
           <span className="text-xl font-bold text-blue-600">Finderight</span>
         </Link>
 
-
         {/* Right Side Navigation */}
         <div className="flex items-center gap-4">
           <Link to="/jobs" className="text-gray-700 hover:text-blue-600">
             Jobs
           </Link>
-
           <Link to="/study-news" className="text-gray-700 hover:text-blue-600">
             Study News
           </Link>
