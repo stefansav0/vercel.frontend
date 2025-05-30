@@ -19,7 +19,7 @@ const Contact = () => {
     setStatus("Sending...");
 
     try {
-      await axios.post("https://your-backend-url.com/api/contact", formData); // Replace with your backend URL
+      await axios.post("https://vercel-backend-66m8.onrender.com/api/contact", formData);
       setStatus("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
