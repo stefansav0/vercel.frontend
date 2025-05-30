@@ -26,7 +26,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        "http://localhost:5000/api/auth/update-profile",
+        "https://vercel-backend-66m8.onrender.com/api/auth/update-profile",
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -47,7 +47,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("http://localhost:5000/api/auth/delete-account", {
+      await axios.delete("https://vercel-backend-66m8.onrender.com/api/auth/delete-account", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
