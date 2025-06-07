@@ -11,6 +11,7 @@ import {
   Paper,
 } from "@mui/material";
 import { CalendarMonth as CalendarIcon } from "@mui/icons-material";
+import { Helmet } from "react-helmet"; // Optional for dynamic title
 
 export default function StudyNewsDetail() {
   const { slug } = useParams();
@@ -21,18 +22,22 @@ export default function StudyNewsDetail() {
     const fetchNews = async () => {
       try {
         const res = await axios.get(
-          `https://vercel-backend-66m8.onrender.com/api/study-news/slug/${slug}`
+          `https://vercel-backend-66m8.onrender.com/api/study-news/slug/${slug.toLowerCase()}`
         );
         setNews(res.data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching study news:", error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchNews();
   }, [slug]);
+
+  const formattedDate = news?.createdAt
+    ? new Date(news.createdAt).toLocaleDateString("en-GB")
+    : "Unknown";
 
   if (loading) {
     return (
@@ -68,6 +73,11 @@ export default function StudyNewsDetail() {
 
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
+      {/* Optional dynamic page title for SEO */}
+      <Helmet>
+        <title>{news.title || "Study News Detail"}</title>
+      </Helmet>
+
       <Paper
         elevation={4}
         sx={{
@@ -83,7 +93,7 @@ export default function StudyNewsDetail() {
           gutterBottom
           color="primary.main"
         >
-          {news.title}
+          {news.title || "Untitled"}
         </Typography>
 
         <Box
@@ -96,13 +106,13 @@ export default function StudyNewsDetail() {
         >
           <CalendarIcon sx={{ fontSize: 20, mr: 1 }} />
           <Typography variant="body2">
-            Published on {new Date(news.createdAt).toLocaleDateString("en-GB")}
+            Published on {formattedDate}
           </Typography>
         </Box>
 
         <Divider sx={{ mb: 3 }} />
 
-        {/* Render HTML content */}
+        {/* Render HTML content safely */}
         <Box
           sx={{
             "& h1, & h2, & h3": {
@@ -141,7 +151,9 @@ export default function StudyNewsDetail() {
               fontWeight: "bold",
             },
           }}
-          dangerouslySetInnerHTML={{ __html: news.description }}
+          dangerouslySetInnerHTML={{
+            __html: news.description || "<p>No content available.</p>",
+          }}
         />
 
         <Divider sx={{ my: 4 }} />
