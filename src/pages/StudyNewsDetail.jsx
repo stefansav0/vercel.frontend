@@ -10,8 +10,6 @@ import {
   Chip,
   Paper,
 } from "@mui/material";
-import { CalendarMonth as CalendarIcon } from "@mui/icons-material";
-import { Helmet } from "react-helmet"; // Optional for dynamic title
 
 export default function StudyNewsDetail() {
   const { slug } = useParams();
@@ -22,12 +20,12 @@ export default function StudyNewsDetail() {
     const fetchNews = async () => {
       try {
         const res = await axios.get(
-          `https://vercel-backend-66m8.onrender.com/api/study-news/slug/${slug.toLowerCase()}`
+          `https://vercel-backend-66m8.onrender.com/api/study-news/slug/${slug}`
         );
         setNews(res.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching study news:", error);
-      } finally {
         setLoading(false);
       }
     };
@@ -35,35 +33,17 @@ export default function StudyNewsDetail() {
     fetchNews();
   }, [slug]);
 
-  const formattedDate = news?.createdAt
-    ? new Date(news.createdAt).toLocaleDateString("en-GB")
-    : "Unknown";
-
   if (loading) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "80vh",
-        }}
-      >
-        <CircularProgress size={50} />
+      <Box className="flex justify-center items-center h-screen">
+        <CircularProgress />
       </Box>
     );
   }
 
   if (!news) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "80vh",
-        }}
-      >
+      <Box className="flex justify-center items-center h-screen">
         <Typography variant="h6" color="error">
           ❌ News not found.
         </Typography>
@@ -73,73 +53,31 @@ export default function StudyNewsDetail() {
 
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
-      {/* Optional dynamic page title for SEO */}
-      <Helmet>
-        <title>{news.title || "Study News Detail"}</title>
-      </Helmet>
-
-      <Paper
-        elevation={4}
-        sx={{
-          p: { xs: 3, sm: 5 },
-          borderRadius: 4,
-          boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
-          backgroundColor: "#fff",
-        }}
-      >
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          gutterBottom
-          color="primary.main"
-        >
-          {news.title || "Untitled"}
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+        <Typography variant="h4" fontWeight={700} gutterBottom>
+          {news.title}
         </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            color: "text.secondary",
-            mb: 2,
-          }}
+        <Typography
+          variant="subtitle2"
+          color="text.secondary"
+          gutterBottom
         >
-          <CalendarIcon sx={{ fontSize: 20, mr: 1 }} />
-          <Typography variant="body2">
-            Published on {formattedDate}
-          </Typography>
-        </Box>
+          Published on {new Date(news.createdAt).toLocaleDateString("en-GB")}
+        </Typography>
 
-        <Divider sx={{ mb: 3 }} />
+        <Divider sx={{ my: 2 }} />
 
-        {/* Render HTML content safely */}
+        {/* Rich HTML content */}
         <Box
+          className="prose prose-sm sm:prose lg:prose-lg max-w-none"
           sx={{
-            "& h1, & h2, & h3": {
-              fontWeight: "bold",
-              mt: 3,
-              mb: 1,
-            },
-            "& p": {
-              fontSize: "1rem",
-              color: "#444",
-              mb: 2,
-              lineHeight: 1.8,
-            },
-            "& ul": {
-              pl: 3,
-              mb: 2,
-            },
-            "& a": {
-              color: "#1976d2",
-              textDecoration: "underline",
-              fontWeight: 500,
-            },
+            mt: 2,
             "& table": {
               width: "100%",
               borderCollapse: "collapse",
-              marginBottom: 20,
-              mt: 3,
+              border: "1px solid #ccc",
+              marginTop: 2,
             },
             "& th, & td": {
               border: "1px solid #ccc",
@@ -150,15 +88,21 @@ export default function StudyNewsDetail() {
               backgroundColor: "#f5f5f5",
               fontWeight: "bold",
             },
+            "& a": {
+              color: "#1976d2",
+              textDecoration: "underline",
+              fontWeight: 500,
+            },
+            "& ul": {
+              pl: 3,
+            },
           }}
-          dangerouslySetInnerHTML={{
-            __html: news.description || "<p>No content available.</p>",
-          }}
+          dangerouslySetInnerHTML={{ __html: news.description }}
         />
 
         <Divider sx={{ my: 4 }} />
 
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+        <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
           <Chip label="Study News" color="primary" />
         </Box>
       </Paper>
