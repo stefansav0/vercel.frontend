@@ -1,17 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Function to load user from token
   const loadUserFromToken = () => {
     const token = localStorage.getItem("token");
-
     if (token) {
       try {
         const decoded = jwtDecode(token);
@@ -29,14 +28,10 @@ const Navbar = () => {
     }
   };
 
-  // Initial token check
   useEffect(() => {
     loadUserFromToken();
-
-    // Listen for custom login events
     window.addEventListener("userLoggedIn", loadUserFromToken);
     window.addEventListener("userLoggedOut", () => setUser(null));
-
     return () => {
       window.removeEventListener("userLoggedIn", loadUserFromToken);
       window.removeEventListener("userLoggedOut", () => setUser(null));
@@ -47,21 +42,32 @@ const Navbar = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
-    window.dispatchEvent(new Event("userLoggedOut")); // Notify others
+    window.dispatchEvent(new Event("userLoggedOut"));
     navigate("/login");
   };
 
   return (
     <header className="bg-white shadow sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo & Brand */}
+        {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img src="/Logo1.png" alt="FinderRight Logo" className="h-8 w-8" />
           <span className="text-xl font-bold text-blue-600">Finderight</span>
         </Link>
 
-        {/* Right Side Navigation */}
-        <div className="flex items-center gap-4">
+        {/* Hamburger Icon (Mobile) */}
+        <div className="md:hidden">
+          <button onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? (
+              <FaTimes className="text-2xl text-gray-700" />
+            ) : (
+              <FaBars className="text-2xl text-gray-700" />
+            )}
+          </button>
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-4">
           <Link to="/jobs" className="text-gray-700 hover:text-blue-600">
             Jobs
           </Link>
@@ -104,6 +110,34 @@ const Navbar = () => {
             </>
           )}
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-start px-4 py-2 md:hidden">
+            <Link to="/jobs" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Jobs</Link>
+            <Link to="/study-news" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Study News</Link>
+
+            {user ? (
+              <>
+                <Link to="/profile" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Profile</Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                  className="py-2 text-gray-700 hover:text-blue-600"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Login</Link>
+                <Link to="/signup" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Signup</Link>
+              </>
+            )}
+          </div>
+        )}
       </nav>
     </header>
   );
