@@ -9,7 +9,9 @@ import {
   Divider,
   Chip,
   Paper,
+  Button,
 } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function StudyNewsDetail() {
   const { slug } = useParams();
@@ -23,9 +25,9 @@ export default function StudyNewsDetail() {
           `https://vercel-backend-66m8.onrender.com/api/study-news/slug/${slug}`
         );
         setNews(res.data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching study news:", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -35,15 +37,26 @@ export default function StudyNewsDetail() {
 
   if (loading) {
     return (
-      <Box className="flex justify-center items-center h-screen">
-        <CircularProgress />
+      <Box
+        height="80vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <CircularProgress size={40} />
       </Box>
     );
   }
 
   if (!news) {
     return (
-      <Box className="flex justify-center items-center h-screen">
+      <Box
+        height="80vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+      >
         <Typography variant="h6" color="error">
           ❌ News not found.
         </Typography>
@@ -53,22 +66,25 @@ export default function StudyNewsDetail() {
 
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
-      <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+      <Paper
+        elevation={4}
+        sx={{
+          p: { xs: 3, sm: 4 },
+          borderRadius: 3,
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+        }}
+      >
         <Typography variant="h4" fontWeight={700} gutterBottom>
           {news.title}
         </Typography>
 
-        <Typography
-          variant="subtitle2"
-          color="text.secondary"
-          gutterBottom
-        >
-          Published on {new Date(news.createdAt).toLocaleDateString("en-GB")}
+        <Typography variant="body2" color="text.secondary" gutterBottom>
+          Published on{" "}
+          {new Date(news.createdAt).toLocaleDateString("en-GB")}
         </Typography>
 
         <Divider sx={{ my: 2 }} />
 
-        {/* Rich HTML content */}
         <Box
           className="prose prose-sm sm:prose lg:prose-lg max-w-none"
           sx={{
@@ -76,16 +92,15 @@ export default function StudyNewsDetail() {
             "& table": {
               width: "100%",
               borderCollapse: "collapse",
-              border: "1px solid #ccc",
               marginTop: 2,
             },
             "& th, & td": {
-              border: "1px solid #ccc",
-              padding: "8px",
+              border: "1px solid #ddd",
+              padding: "10px",
               textAlign: "left",
             },
             "& th": {
-              backgroundColor: "#f5f5f5",
+              backgroundColor: "#f9f9f9",
               fontWeight: "bold",
             },
             "& a": {
@@ -94,7 +109,7 @@ export default function StudyNewsDetail() {
               fontWeight: 500,
             },
             "& ul": {
-              pl: 3,
+              paddingLeft: 3,
             },
           }}
           dangerouslySetInnerHTML={{ __html: news.description }}
@@ -102,10 +117,21 @@ export default function StudyNewsDetail() {
 
         <Divider sx={{ my: 4 }} />
 
-        <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+        <Box display="flex" flexWrap="wrap" gap={1}>
           <Chip label="Study News" color="primary" />
         </Box>
       </Paper>
+
+      {/* Optional Back Button */}
+      <Box mt={3}>
+        <Button
+          variant="outlined"
+          startIcon={<ArrowBackIcon />}
+          href="/study-news"
+        >
+          Back to News
+        </Button>
+      </Box>
     </Container>
   );
 }
