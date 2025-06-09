@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom"; // ✅ FIXED: Import Link
 import axios from "axios";
 import {
   Box,
@@ -9,9 +9,7 @@ import {
   Divider,
   Chip,
   Paper,
-  Button,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function StudyNewsDetail() {
   const { slug } = useParams();
@@ -92,7 +90,7 @@ export default function StudyNewsDetail() {
 
         <Divider sx={{ my: 3 }} />
 
-        {/* News Body */}
+        {/* News Content */}
         <Box
           sx={{
             mt: 2,
@@ -134,12 +132,11 @@ export default function StudyNewsDetail() {
       </Paper>
 
       {/* Back Button */}
-      {/* Back Link */}
-      <div className="text-center mt-6">
-        <Link to="/study-news" className="text-blue-600 hover:underline font-medium">
+      <Box mt={4} textAlign="center">
+        <Link to="/study-news" style={{ color: "#1976d2", fontWeight: 500 }}>
           ← Back to Study News
         </Link>
-      </div>
+      </Box>
     </Container>
   );
 }
