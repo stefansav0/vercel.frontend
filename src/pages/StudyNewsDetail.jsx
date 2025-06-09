@@ -40,8 +40,8 @@ export default function StudyNewsDetail() {
       <Box
         height="80vh"
         display="flex"
-        alignItems="center"
         justifyContent="center"
+        alignItems="center"
       >
         <CircularProgress size={40} />
       </Box>
@@ -53,8 +53,8 @@ export default function StudyNewsDetail() {
       <Box
         height="80vh"
         display="flex"
-        alignItems="center"
         justifyContent="center"
+        alignItems="center"
         textAlign="center"
       >
         <Typography variant="h6" color="error">
@@ -67,32 +67,41 @@ export default function StudyNewsDetail() {
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>
       <Paper
-        elevation={4}
+        elevation={3}
         sx={{
           p: { xs: 3, sm: 4 },
-          borderRadius: 3,
-          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+          borderRadius: 4,
+          boxShadow: 6,
+          backgroundColor: "#ffffff",
         }}
       >
-        <Typography variant="h4" fontWeight={700} gutterBottom>
+        {/* Title */}
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          gutterBottom
+          sx={{ color: "#1a202c" }}
+        >
           {news.title}
         </Typography>
 
-        <Typography variant="body2" color="text.secondary" gutterBottom>
-          Published on{" "}
-          {new Date(news.createdAt).toLocaleDateString("en-GB")}
+        {/* Date */}
+        <Typography variant="body2" color="text.secondary" mb={2}>
+          Published on {new Date(news.createdAt).toLocaleDateString("en-GB")}
         </Typography>
 
-        <Divider sx={{ my: 2 }} />
+        <Divider sx={{ my: 3 }} />
 
+        {/* News Body */}
         <Box
-          className="prose prose-sm sm:prose lg:prose-lg max-w-none"
           sx={{
             mt: 2,
+            fontSize: "1rem",
+            lineHeight: 1.8,
             "& table": {
               width: "100%",
               borderCollapse: "collapse",
-              marginTop: 2,
+              marginY: 2,
             },
             "& th, & td": {
               border: "1px solid #ddd",
@@ -100,8 +109,8 @@ export default function StudyNewsDetail() {
               textAlign: "left",
             },
             "& th": {
-              backgroundColor: "#f9f9f9",
-              fontWeight: "bold",
+              backgroundColor: "#f0f0f0",
+              fontWeight: 600,
             },
             "& a": {
               color: "#1976d2",
@@ -110,6 +119,7 @@ export default function StudyNewsDetail() {
             },
             "& ul": {
               paddingLeft: 3,
+              marginTop: 1,
             },
           }}
           dangerouslySetInnerHTML={{ __html: news.description }}
@@ -117,17 +127,19 @@ export default function StudyNewsDetail() {
 
         <Divider sx={{ my: 4 }} />
 
+        {/* Tags */}
         <Box display="flex" flexWrap="wrap" gap={1}>
           <Chip label="Study News" color="primary" />
         </Box>
       </Paper>
 
-      {/* Optional Back Button */}
-      <Box mt={3}>
+      {/* Back Button */}
+      <Box mt={4}>
         <Button
           variant="outlined"
           startIcon={<ArrowBackIcon />}
           href="/study-news"
+          sx={{ textTransform: "none" }}
         >
           Back to News
         </Button>
