@@ -134,16 +134,12 @@ export default function StudyNewsDetail() {
       </Paper>
 
       {/* Back Button */}
-      <Box mt={4}>
-        <Button
-          variant="outlined"
-          startIcon={<ArrowBackIcon />}
-          href="/study-news"
-          sx={{ textTransform: "none" }}
-        >
-          Back to News
-        </Button>
-      </Box>
+      {/* Back Link */}
+      <div className="text-center mt-6">
+        <Link to="/study-news" className="text-blue-600 hover:underline font-medium">
+          ← Back to Study News
+        </Link>
+      </div>
     </Container>
   );
 }
