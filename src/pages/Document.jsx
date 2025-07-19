@@ -13,12 +13,14 @@ function Document() {
   const fetchDocuments = async (page) => {
     setLoading(true);
     try {
-      const res = await fetch(`https://vercel-backend-66m8.onrender.com/api/documents?page=${page}`);
+      const res = await fetch(
+        `https://vercel-backend-66m8.onrender.com/api/documents?page=${page}`
+      );
       const data = await res.json();
 
       setDocuments((prev) => {
         const combined = [...prev, ...(Array.isArray(data.documents) ? data.documents : [])];
-        const unique = Array.from(new Map(combined.map(item => [item._id, item])).values());
+        const unique = Array.from(new Map(combined.map((item) => [item._id, item])).values());
         return unique;
       });
 
@@ -75,13 +77,13 @@ function Document() {
                 className="p-4 border rounded-2xl shadow hover:shadow-lg transition bg-white"
                 key={doc._id}
               >
-                <h2 className="text-lg font-semibold text-blue-600">
-                  {doc.title}
-                </h2>
+                <h2 className="text-lg font-semibold text-blue-600">{doc.title}</h2>
 
-                <div className="mt-1 text-sm text-gray-600">
-                  {doc.category} — {doc.serviceType}
-                </div>
+                {(doc.category || doc.serviceType) && (
+                  <div className="mt-1 text-sm text-gray-600">
+                    {doc.category ?? "Document"} — {doc.serviceType ?? "Online"}
+                  </div>
+                )}
 
                 <p className="mt-2 text-sm text-gray-700">{doc.description}</p>
 
@@ -113,7 +115,11 @@ function Document() {
 
       {loading && (
         <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600" />
+          <div
+            className="animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent"
+            role="status"
+            aria-label="Loading"
+          />
         </div>
       )}
 
