@@ -43,6 +43,7 @@ import Disclaimer from './pages/legal/Disclaimer';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import TermsAndConditions from './pages/legal/TermsAndConditions';
 import AboutUs from "./pages/legal/AboutUs";
+import DocumentDetail from "./pages/DocumentDetail";
 
 
 // Newly added page
@@ -96,6 +97,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/admin/manage-study-news" element={<AdminStudyNews />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/documents/:slug" element={<DocumentDetail />} />
           
           
 

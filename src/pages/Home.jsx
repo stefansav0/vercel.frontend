@@ -16,7 +16,6 @@ const Home = () => {
     const getJobs = async () => {
       try {
         const response = await fetch("https://vercel-backend-66m8.onrender.com/api/jobs/latest");
-
         const data = await response.json();
         if (data.success && Array.isArray(data.jobs)) {
           setJobListings(data.jobs);
@@ -40,6 +39,7 @@ const Home = () => {
     { name: "Admit Card", path: "/admit-card" },
     { name: "Answer Key", path: "/answer-key" },
     { name: "Admission", path: "/admission" },
+    { name: "Documents", path: "/documents" }, // ✅ NEW CATEGORY
   ];
 
   const handleShowMore = () => {
