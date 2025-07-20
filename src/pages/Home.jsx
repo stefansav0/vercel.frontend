@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Briefcase, Calendar, FileText } from "lucide-react"; // Optional: lucide icons
 
 const Home = () => {
   const [jobListings, setJobListings] = useState([]);
@@ -8,8 +9,14 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   const colors = [
-    "bg-blue-700", "bg-red-600", "bg-green-700", "bg-pink-600",
-    "bg-indigo-700", "bg-yellow-600", "bg-purple-700", "bg-orange-600",
+    "bg-gradient-to-r from-blue-500 to-indigo-600",
+    "bg-gradient-to-r from-red-500 to-pink-600",
+    "bg-gradient-to-r from-green-500 to-emerald-600",
+    "bg-gradient-to-r from-purple-500 to-violet-600",
+    "bg-gradient-to-r from-yellow-500 to-orange-500",
+    "bg-gradient-to-r from-teal-500 to-cyan-600",
+    "bg-gradient-to-r from-pink-500 to-rose-600",
+    "bg-gradient-to-r from-indigo-500 to-fuchsia-600",
   ];
 
   useEffect(() => {
@@ -39,7 +46,7 @@ const Home = () => {
     { name: "Admit Card", path: "/admit-card" },
     { name: "Answer Key", path: "/answer-key" },
     { name: "Admission", path: "/admission" },
-    { name: "Documents", path: "/documents" }, // ✅ NEW CATEGORY
+    { name: "Documents", path: "/documents" },
   ];
 
   const handleShowMore = () => {
@@ -47,20 +54,20 @@ const Home = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-8">
       {/* Hero */}
-      <div className="text-center bg-blue-600 text-white py-10 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold">Find Your Dream Sarkari Job</h1>
-        <p className="mt-2 text-lg">Get the latest government job updates.</p>
+      <div className="text-center bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-14 px-4 rounded-xl shadow-xl">
+        <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-2">Find Your Dream Sarkari Job</h1>
+        <p className="text-lg font-light tracking-wide">Get the latest updates on government jobs, results, and more.</p>
       </div>
 
       {/* Category Buttons */}
-      <div className="mt-6 flex justify-center flex-wrap gap-4">
+      <div className="mt-8 flex justify-center flex-wrap gap-4">
         {homeCategories.map((category, i) => (
           <Link
             key={i}
             to={category.path}
-            className="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300 transition font-medium"
+            className="bg-white border border-gray-300 shadow hover:shadow-md px-5 py-2 rounded-full font-medium text-gray-700 hover:bg-blue-50 transition-all duration-200"
           >
             {category.name}
           </Link>
@@ -68,26 +75,27 @@ const Home = () => {
       </div>
 
       {/* Latest Jobs */}
-      <div className="mt-10">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Latest Jobs
-        </h2>
+      <div className="mt-14">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">🔥 Latest Jobs</h2>
 
         {loading ? (
-          <p className="text-center animate-pulse">Loading latest jobs...</p>
+          <p className="text-center text-gray-500 animate-pulse">Loading latest jobs...</p>
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : jobListings.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {jobListings.slice(0, visibleCount).map((job, index) => (
                 <Link
                   key={job._id}
                   to={`/job/${job._id}`}
-                  className={`p-5 rounded-xl text-white font-bold text-lg shadow-md hover:scale-105 transition duration-200 ${colors[index % colors.length]}`}
+                  className={`p-6 rounded-xl text-white font-semibold text-lg shadow-lg hover:scale-[1.03] transition-transform duration-200 ease-in-out ${colors[index % colors.length]}`}
                 >
-                  {job.title}
-                  <div className="text-sm font-normal mt-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Briefcase size={20} />
+                    {job.title}
+                  </div>
+                  <div className="text-sm font-normal text-white/90 mt-1">
                     {job.department || job.category}
                   </div>
                 </Link>
@@ -96,12 +104,12 @@ const Home = () => {
 
             {/* Load More */}
             {visibleCount < jobListings.length && (
-              <div className="text-center mt-6">
+              <div className="text-center mt-8">
                 <button
                   onClick={handleShowMore}
-                  className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium"
+                  className="px-6 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md font-medium"
                 >
-                  Show More Jobs
+                  Load More Jobs
                 </button>
               </div>
             )}
@@ -110,7 +118,7 @@ const Home = () => {
             <div className="text-center mt-4">
               <Link
                 to="/jobs"
-                className="text-blue-600 hover:underline font-medium text-sm"
+                className="text-indigo-600 hover:underline font-medium text-sm"
               >
                 → View All Jobs
               </Link>
