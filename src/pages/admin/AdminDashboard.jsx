@@ -17,9 +17,9 @@ const AdminDashboard = () => {
     { label: "Admit Cards", route: "/admin/add-admit-card", manage: "/admin/manage-admit-cards" },
     { label: "Answer Keys", route: "/admin/add-answer-key", manage: "/admin/manage-answer-keys" },
     { label: "Study News", route: "/admin/add-study-news", manage: "/admin/manage-study-news" },
+    { label: "Documents", route: "/admin/add-document", manage: "/admin/manage-documents" }, // ✅ Added
   ];
 
-  
   return (
     <Box sx={{ p: 4 }}>
       <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
@@ -41,7 +41,6 @@ const AdminDashboard = () => {
           </Button>
         </div>
 
-        {/* Replace this with dynamic content or fetch from API */}
         <p>All {sections[tab].label} will be listed here.</p>
         <Button
           variant="outlined"
