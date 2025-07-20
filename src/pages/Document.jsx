@@ -3,6 +3,10 @@ import { ExternalLink, ArrowUp } from "lucide-react";
 
 function Document() {
   const [documents, setDocuments] = useState([]);
+  const [filteredDocs, setFilteredDocs] = useState([]);
+  const [categories, setCategories] = useState(["All"]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState("");
@@ -18,12 +22,11 @@ function Document() {
       );
       const data = await res.json();
 
-      setDocuments((prev) => {
-        const combined = [...prev, ...(Array.isArray(data.documents) ? data.documents : [])];
-        const unique = Array.from(new Map(combined.map((item) => [item._id, item])).values());
-        return unique;
-      });
+      const newDocs = Array.isArray(data.documents) ? data.documents : [];
+      const combined = [...documents, ...newDocs];
+      const unique = Array.from(new Map(combined.map((item) => [item._id, item])).values());
 
+      setDocuments(unique);
       setTotalPages(data.totalPages || 1);
       setCurrentPage(data.currentPage || page);
     } catch {
@@ -36,6 +39,19 @@ function Document() {
   useEffect(() => {
     fetchDocuments(1);
   }, []);
+
+  useEffect(() => {
+    const allCategories = ["All", ...new Set(documents.map((doc) => doc.category).filter(Boolean))];
+    setCategories(allCategories);
+  }, [documents]);
+
+  useEffect(() => {
+    const filtered =
+      selectedCategory === "All"
+        ? documents
+        : documents.filter((doc) => doc.category === selectedCategory);
+    setFilteredDocs(filtered);
+  }, [documents, selectedCategory]);
 
   const lastItemRef = useCallback(
     (node) => {
@@ -69,9 +85,27 @@ function Document() {
 
       {error && <p className="text-red-500 text-center">{error}</p>}
 
+      {/* Category Buttons */}
+      <div className="flex flex-wrap gap-3 justify-center mb-6">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-4 py-1 rounded-full text-sm font-medium capitalize ${
+              selectedCategory === cat
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Document Cards */}
       <div className="space-y-4">
-        {documents.length > 0 ? (
-          documents.map((doc, index) => {
+        {filteredDocs.length > 0 ? (
+          filteredDocs.map((doc, index) => {
             const content = (
               <div
                 className="p-4 border rounded-2xl shadow hover:shadow-lg transition bg-white"
@@ -80,7 +114,7 @@ function Document() {
                 <h2 className="text-lg font-semibold text-blue-600">{doc.title}</h2>
 
                 {(doc.category || doc.serviceType) && (
-                  <div className="mt-1 text-sm text-gray-600">
+                  <div className="mt-1 text-sm text-gray-600 capitalize">
                     {doc.category ?? "Document"} — {doc.serviceType ?? "Online"}
                   </div>
                 )}
@@ -100,7 +134,7 @@ function Document() {
               </div>
             );
 
-            return documents.length === index + 1 ? (
+            return filteredDocs.length === index + 1 ? (
               <div ref={lastItemRef} key={`${doc._id}-last`}>
                 {content}
               </div>
@@ -113,6 +147,7 @@ function Document() {
         )}
       </div>
 
+      {/* Loader */}
       {loading && (
         <div className="flex justify-center items-center py-8">
           <div
@@ -123,6 +158,7 @@ function Document() {
         </div>
       )}
 
+      {/* Scroll to Top */}
       {showTopButton && (
         <button
           onClick={scrollToTop}
