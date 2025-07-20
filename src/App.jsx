@@ -32,6 +32,8 @@ import AdminAdmissions from "./pages/admin/AdminAdmissions";
 import AdminAnswerKeys from "./pages/admin/AdminAnswerKeys";
 import AdminAdmitCards from "./pages/admin/AdminAdmitCards";
 import Contact from "./pages/Contact"; // Adjust path if needed
+import AdminAddDocument from "./pages/admin/AdminAddDocument";
+import AdminDocuments from "./pages/admin/AdminDocuments";
 
 // Study News Components
 import AdminAddStudyNews from "./pages/admin/AdminAddStudyNews";
@@ -98,6 +100,8 @@ function App() {
           <Route path="/admin/manage-study-news" element={<AdminStudyNews />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/documents/:slug" element={<DocumentDetail />} />
+          <Route path="/admin/add-document" element={<AdminAddDocument />} />
+          <Route path="/admin/manage-documents" element={<AdminDocuments />} />
           
           
 
