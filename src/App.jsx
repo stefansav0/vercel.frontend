@@ -46,6 +46,8 @@ import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import TermsAndConditions from './pages/legal/TermsAndConditions';
 import AboutUs from "./pages/legal/AboutUs";
 import DocumentDetail from "./pages/DocumentDetail";
+import Document from "./pages/Document"; // ✅ Make sure this is already imported
+
 
 
 // Newly added page
@@ -102,7 +104,7 @@ function App() {
           <Route path="/documents/:slug" element={<DocumentDetail />} />
           <Route path="/admin/add-document" element={<AdminAddDocument />} />
           <Route path="/admin/manage-documents" element={<AdminDocuments />} />
-          
+          <Route path="/documents" element={<Document />} /> {/* ✅ Added */}
           
 
           
