@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Briefcase, Calendar, FileText } from "lucide-react"; // Optional: lucide icons
+import { Briefcase } from "lucide-react";
 
 const Home = () => {
   const [jobListings, setJobListings] = useState([]);
@@ -9,30 +9,27 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   const colors = [
-    "bg-gradient-to-r from-blue-500 to-indigo-600",
-    "bg-gradient-to-r from-red-500 to-pink-600",
-    "bg-gradient-to-r from-green-500 to-emerald-600",
-    "bg-gradient-to-r from-purple-500 to-violet-600",
+    "bg-gradient-to-r from-blue-600 to-indigo-600",
+    "bg-gradient-to-r from-pink-500 to-rose-500",
+    "bg-gradient-to-r from-green-600 to-teal-500",
+    "bg-gradient-to-r from-purple-600 to-fuchsia-500",
     "bg-gradient-to-r from-yellow-500 to-orange-500",
-    "bg-gradient-to-r from-teal-500 to-cyan-600",
-    "bg-gradient-to-r from-pink-500 to-rose-600",
-    "bg-gradient-to-r from-indigo-500 to-fuchsia-600",
+    "bg-gradient-to-r from-cyan-500 to-blue-500",
+    "bg-gradient-to-r from-red-500 to-pink-600",
   ];
 
   useEffect(() => {
     const getJobs = async () => {
       try {
-        const response = await fetch("https://vercel-backend-66m8.onrender.com/api/jobs/latest");
-        const data = await response.json();
+        const res = await fetch("https://vercel-backend-66m8.onrender.com/api/jobs/latest");
+        const data = await res.json();
         if (data.success && Array.isArray(data.jobs)) {
           setJobListings(data.jobs);
         } else {
-          throw new Error("Invalid job data");
+          throw new Error("Invalid data format");
         }
       } catch (err) {
-        console.error("Error fetching jobs:", err);
-        setError("Failed to fetch jobs. Please try again later.");
-        setJobListings([]);
+        setError("Something went wrong while fetching jobs.");
       } finally {
         setLoading(false);
       }
@@ -54,80 +51,82 @@ const Home = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="max-w-screen-xl mx-auto px-4 py-12">
       {/* Hero */}
-      <div className="text-center bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-14 px-4 rounded-xl shadow-xl">
-        <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-2">Find Your Dream Sarkari Job</h1>
-        <p className="text-lg font-light tracking-wide">Get the latest updates on government jobs, results, and more.</p>
+      <div className="text-center py-14 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 text-white rounded-xl shadow-lg">
+        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+          Find Your Dream Sarkari Job
+        </h1>
+        <p className="text-lg md:text-xl text-white/90">
+          Get the latest updates on government jobs, results, admit cards, and more.
+        </p>
       </div>
 
-      {/* Category Buttons */}
-      <div className="mt-8 flex justify-center flex-wrap gap-4">
-        {homeCategories.map((category, i) => (
+      {/* Categories */}
+      <div className="flex flex-wrap justify-center gap-4 mt-10">
+        {homeCategories.map((cat, i) => (
           <Link
             key={i}
-            to={category.path}
-            className="bg-white border border-gray-300 shadow hover:shadow-md px-5 py-2 rounded-full font-medium text-gray-700 hover:bg-blue-50 transition-all duration-200"
+            to={cat.path}
+            className="px-6 py-2 text-sm md:text-base rounded-full border border-gray-300 bg-white hover:bg-blue-50 hover:text-blue-700 font-medium shadow-sm transition"
           >
-            {category.name}
+            {cat.name}
           </Link>
         ))}
       </div>
 
       {/* Latest Jobs */}
-      <div className="mt-14">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">🔥 Latest Jobs</h2>
+      <section className="mt-14">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8"> Latest Jobs</h2>
 
         {loading ? (
-          <p className="text-center text-gray-500 animate-pulse">Loading latest jobs...</p>
+          <p className="text-center text-gray-500 animate-pulse">Loading jobs...</p>
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
-        ) : jobListings.length > 0 ? (
+        ) : jobListings.length ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {jobListings.slice(0, visibleCount).map((job, index) => (
                 <Link
                   key={job._id}
                   to={`/job/${job._id}`}
-                  className={`p-6 rounded-xl text-white font-semibold text-lg shadow-lg hover:scale-[1.03] transition-transform duration-200 ease-in-out ${colors[index % colors.length]}`}
+                  className={`p-5 rounded-xl text-white shadow-md transition-transform hover:scale-[1.02] duration-200 ${colors[index % colors.length]}`}
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <Briefcase size={20} />
+                  <div className="flex items-center gap-2 text-lg font-semibold">
+                    <Briefcase className="w-5 h-5" />
                     {job.title}
                   </div>
-                  <div className="text-sm font-normal text-white/90 mt-1">
+                  <p className="mt-1 text-sm font-light text-white/90">
                     {job.department || job.category}
-                  </div>
+                  </p>
                 </Link>
               ))}
             </div>
 
-            {/* Load More */}
             {visibleCount < jobListings.length && (
-              <div className="text-center mt-8">
+              <div className="text-center mt-10">
                 <button
                   onClick={handleShowMore}
-                  className="px-6 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-md font-medium"
+                  className="px-6 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition shadow-lg"
                 >
                   Load More Jobs
                 </button>
               </div>
             )}
 
-            {/* View All Jobs */}
-            <div className="text-center mt-4">
+            <div className="text-center mt-6">
               <Link
                 to="/jobs"
-                className="text-indigo-600 hover:underline font-medium text-sm"
+                className="text-indigo-600 hover:underline text-sm font-medium"
               >
                 → View All Jobs
               </Link>
             </div>
           </>
         ) : (
-          <p className="text-center text-gray-500">No jobs available.</p>
+          <p className="text-center text-gray-500">No jobs found.</p>
         )}
-      </div>
+      </section>
     </div>
   );
 };
