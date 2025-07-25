@@ -13,7 +13,7 @@ const AiChatWidget = () => {
       const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer YOUR_API_KEY", // ✅ Use your real API key
+          "Authorization": "Bearer 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", // ✅ Use your real API key
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
