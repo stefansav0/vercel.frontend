@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+// Core Components
 import RedirectToSlug from "./pages/RedirectToSlug";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -31,33 +32,33 @@ import AdminResults from "./pages/admin/AdminResults";
 import AdminAdmissions from "./pages/admin/AdminAdmissions";
 import AdminAnswerKeys from "./pages/admin/AdminAnswerKeys";
 import AdminAdmitCards from "./pages/admin/AdminAdmitCards";
-import Contact from "./pages/Contact"; // Adjust path if needed
+import Contact from "./pages/Contact"; // ✅ FIXED: Contact component now properly imported
 import AdminAddDocument from "./pages/admin/AdminAddDocument";
 import AdminDocuments from "./pages/admin/AdminDocuments";
+import CopilotAI from "./components/CopilotAI"; // ✅ Copilot AI Component Imported
 
 // Study News Components
 import AdminAddStudyNews from "./pages/admin/AdminAddStudyNews";
 import StudyNewsList from "./pages/StudyNewsList";
 import StudyNewsDetail from "./pages/StudyNewsDetail";
-import AdminStudyNews from "./pages/admin/AdminStudyNews"
+import AdminStudyNews from "./pages/admin/AdminStudyNews";
 
+// Legal Pages
 import Disclaimer from './pages/legal/Disclaimer';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import TermsAndConditions from './pages/legal/TermsAndConditions';
 import AboutUs from "./pages/legal/AboutUs";
+
+// Documents
 import DocumentDetail from "./pages/DocumentDetail";
-import Document from "./pages/Document"; // ✅ Make sure this is already imported
+import Document from "./pages/Document";
 
-
-
-// Newly added page
+// Newly added page sections
 import Result from "./pages/Result";
 import AdmitCard from "./pages/AdmitCard";
 import AnswerKey from "./pages/AnswerKey";
 import Admission from "./pages/Admission";
-
-// ✅ Import new OTP verification page
-import VerifyOtp from "./pages/VerifyOtp";
+import VerifyOtp from "./pages/VerifyOtp"; // ✅ OTP route import
 
 function App() {
   return (
@@ -75,12 +76,14 @@ function App() {
           <Route path="/admit-card/:slug" element={<AdmitCardDetail />} />
           <Route path="/answer-key/:slug" element={<AnswerKeyDetail />} />
           <Route path="/admission/:slug" element={<AdmissionDetail />} />
-          <Route path="/admin/add-job" element={<AddJob />} />
-          <Route path="/admin/manage-jobs" element={<AdminJobs />} />
-          <Route path="/admin/edit-job/:id" element={<EditJob />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/header" element={<Header />} />
+
+          {/* Admin Panel Routes */}
+          <Route path="/admin/add-job" element={<AddJob />} />
+          <Route path="/admin/manage-jobs" element={<AdminJobs />} />
+          <Route path="/admin/edit-job/:id" element={<EditJob />} />
           <Route path="/admin/add-result" element={<AddResult />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/add-admit-card" element={<AdminAddAdmitCard />} />
@@ -90,25 +93,29 @@ function App() {
           <Route path="/admin/manage-admissions" element={<AdminAdmissions />} />
           <Route path="/admin/manage-answer-keys" element={<AdminAnswerKeys />} />
           <Route path="/admin/manage-admit-cards" element={<AdminAdmitCards />} />
+          <Route path="/admin/add-study-news" element={<AdminAddStudyNews />} />
+          <Route path="/admin/manage-study-news" element={<AdminStudyNews />} />
+          <Route path="/admin/add-document" element={<AdminAddDocument />} />
+          <Route path="/admin/manage-documents" element={<AdminDocuments />} />
+
+          {/* Study News */}
           <Route path="/study-news" element={<StudyNewsList />} />
           <Route path="/study-news/:slug" element={<StudyNewsDetail />} />
 
-          <Route path="/admin/add-study-news" element={<AdminAddStudyNews />} />
+          {/* Documents */}
+          <Route path="/documents" element={<Document />} /> {/* ✅ Added */}
+          <Route path="/documents/:slug" element={<DocumentDetail />} />
 
+          {/* Legal */}
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/admin/manage-study-news" element={<AdminStudyNews />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/documents/:slug" element={<DocumentDetail />} />
-          <Route path="/admin/add-document" element={<AdminAddDocument />} />
-          <Route path="/admin/manage-documents" element={<AdminDocuments />} />
-          <Route path="/documents" element={<Document />} /> {/* ✅ Added */}
-          
 
-          
-
+          {/* Utility/Support */}
+          <Route path="/contact" element={<Contact />} /> {/* ✅ FIXED Error: Contact not defined */}
+          <Route path="/ai-assistant" element={<CopilotAI />} /> {/* ✅ Updated to match your menu link */}
+          {/* ✅ NEW: Copilot AI Assistant */}
 
           {/* Newly Added Routes */}
           <Route path="/result" element={<Result />} />

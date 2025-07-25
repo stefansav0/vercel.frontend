@@ -15,7 +15,7 @@ const Navbar = () => {
       try {
         const decoded = jwtDecode(token);
         if (decoded.exp * 1000 < Date.now()) {
-          handleLogout(); // Token expired
+          handleLogout();
         } else {
           setUser(decoded);
         }
@@ -68,15 +68,10 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-4">
-          <Link to="/" className="text-gray-700 hover:text-blue-600">
-            Home
-          </Link>
-          <Link to="/jobs" className="text-gray-700 hover:text-blue-600">
-            Jobs
-          </Link>
-          <Link to="/study-news" className="text-gray-700 hover:text-blue-600">
-            Study News
-          </Link>
+          <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+          <Link to="/jobs" className="text-gray-700 hover:text-blue-600">Jobs</Link>
+          <Link to="/study-news" className="text-gray-700 hover:text-blue-600">Study News</Link>
+          <Link to="/ai-assistant" className="text-gray-700 hover:text-blue-600">AI Assistant</Link>
 
           {user ? (
             <div className="relative">
@@ -104,22 +99,19 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-gray-700 hover:text-blue-600">
-                Login
-              </Link>
-              <Link to="/signup" className="text-gray-700 hover:text-blue-600">
-                Signup
-              </Link>
+              <Link to="/login" className="text-gray-700 hover:text-blue-600">Login</Link>
+              <Link to="/signup" className="text-gray-700 hover:text-blue-600">Signup</Link>
             </>
           )}
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Menu */}
         {menuOpen && (
           <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-start px-4 py-2 md:hidden">
             <Link to="/" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Home</Link>
             <Link to="/jobs" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Jobs</Link>
             <Link to="/study-news" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Study News</Link>
+            <Link to="/ai-assistant" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>AI Assistant</Link>
 
             {user ? (
               <>

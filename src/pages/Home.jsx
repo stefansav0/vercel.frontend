@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Briefcase } from "lucide-react";
+import CopilotAI from "../components/CopilotAI"; // ✅ Imported AI Assistant
 
 const Home = () => {
   const [jobListings, setJobListings] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showChatbot, setShowChatbot] = useState(false); // ✅ Chat toggle state
 
   const colors = [
     "bg-gradient-to-r from-blue-600 to-indigo-600",
@@ -51,7 +53,7 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-4 py-12">
+    <div className="max-w-screen-xl mx-auto px-4 py-12 relative">
       {/* Hero */}
       <div className="text-center py-14 px-4 bg-gradient-to-r from-blue-700 to-indigo-800 text-white rounded-xl shadow-lg">
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
@@ -77,7 +79,7 @@ const Home = () => {
 
       {/* Latest Jobs */}
       <section className="mt-14">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8"> Latest Jobs</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Latest Jobs</h2>
 
         {loading ? (
           <p className="text-center text-gray-500 animate-pulse">Loading jobs...</p>
@@ -127,6 +129,22 @@ const Home = () => {
           <p className="text-center text-gray-500">No jobs found.</p>
         )}
       </section>
+
+      {/* ✅ Floating AI Button and Box */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full shadow-lg"
+          onClick={() => setShowChatbot(!showChatbot)}
+        >
+          {showChatbot ? "Close AI" : "Ask AI"}
+        </button>
+      </div>
+
+      {showChatbot && (
+        <div className="fixed bottom-20 right-4 z-50 max-w-md w-full bg-white border rounded-xl shadow-lg">
+          <CopilotAI />
+        </div>
+      )}
     </div>
   );
 };
