@@ -23,7 +23,7 @@ import EditJob from "./pages/admin/EditJob";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Header from "./components/Header";
-import AddResult from "./pages/admin/AddResult";
+import AddResult  from "./pages/admin/AddResult";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminAddAdmitCard from "./pages/admin/AdminAddAdmitCard";
 import AdminAddAnswerKey from "./pages/admin/AdminAddAnswerKey";
@@ -32,22 +32,21 @@ import AdminResults from "./pages/admin/AdminResults";
 import AdminAdmissions from "./pages/admin/AdminAdmissions";
 import AdminAnswerKeys from "./pages/admin/AdminAnswerKeys";
 import AdminAdmitCards from "./pages/admin/AdminAdmitCards";
-import Contact from "./pages/Contact";
+import Contact from "./pages/Contact"; // ✅ FIXED: Contact component now properly imported
 import AdminAddDocument from "./pages/admin/AdminAddDocument";
 import AdminDocuments from "./pages/admin/AdminDocuments";
-import CopilotAI from "./components/CopilotAI"; // ✅ Full page AI Assistant
-import AiChatWidget from "./components/AiChatWidget"; // ✅ Floating AI Widget
+import CopilotAI from "./components/CopilotAI"; // ✅ Copilot AI Component Imported
 
-// Study News
+// Study News Components
 import AdminAddStudyNews from "./pages/admin/AdminAddStudyNews";
 import StudyNewsList from "./pages/StudyNewsList";
 import StudyNewsDetail from "./pages/StudyNewsDetail";
 import AdminStudyNews from "./pages/admin/AdminStudyNews";
 
 // Legal Pages
-import Disclaimer from "./pages/legal/Disclaimer";
-import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
-import TermsAndConditions from "./pages/legal/TermsAndConditions";
+import Disclaimer from './pages/legal/Disclaimer';
+import PrivacyPolicy from './pages/legal/PrivacyPolicy';
+import TermsAndConditions from './pages/legal/TermsAndConditions';
 import AboutUs from "./pages/legal/AboutUs";
 
 // Documents
@@ -59,7 +58,7 @@ import Result from "./pages/Result";
 import AdmitCard from "./pages/AdmitCard";
 import AnswerKey from "./pages/AnswerKey";
 import Admission from "./pages/Admission";
-import VerifyOtp from "./pages/VerifyOtp";
+import VerifyOtp from "./pages/VerifyOtp"; // ✅ OTP route import
 
 function App() {
   return (
@@ -81,7 +80,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/header" element={<Header />} />
 
-          {/* Admin Panel */}
+          {/* Admin Panel Routes */}
           <Route path="/admin/add-job" element={<AddJob />} />
           <Route path="/admin/manage-jobs" element={<AdminJobs />} />
           <Route path="/admin/edit-job/:id" element={<EditJob />} />
@@ -104,7 +103,7 @@ function App() {
           <Route path="/study-news/:slug" element={<StudyNewsDetail />} />
 
           {/* Documents */}
-          <Route path="/documents" element={<Document />} />
+          <Route path="/documents" element={<Document />} /> {/* ✅ Added */}
           <Route path="/documents/:slug" element={<DocumentDetail />} />
 
           {/* Legal */}
@@ -113,35 +112,32 @@ function App() {
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/about-us" element={<AboutUs />} />
 
-          {/* Utilities */}
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/ai-assistant" element={<CopilotAI />} /> {/* ✅ Full-page AI Assistant */}
+          {/* Utility/Support */}
+          <Route path="/contact" element={<Contact />} /> {/* ✅ FIXED Error: Contact not defined */}
+          <Route path="/ai-assistant" element={<CopilotAI />} /> {/* ✅ Updated to match your menu link */}
+          {/* ✅ NEW: Copilot AI Assistant */}
 
-          {/* More Sections */}
+          {/* Newly Added Routes */}
           <Route path="/result" element={<Result />} />
           <Route path="/admit-card" element={<AdmitCard />} />
           <Route path="/answer-key" element={<AnswerKey />} />
           <Route path="/admission" element={<Admission />} />
 
-          {/* Auth */}
+          {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} /> {/* ✅ Updated */}
           <Route path="/resend-verification" element={<ResendVerification />} />
 
-          {/* Protected Route */}
+          {/* Protected Routes */}
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
 
-          {/* 404 */}
+          {/* Catch-all 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
-      {/* ✅ Floating AI Widget shows on every page */}
-      <AiChatWidget />
-
       <Footer />
     </div>
   );
