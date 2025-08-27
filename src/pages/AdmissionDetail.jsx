@@ -3,22 +3,49 @@ import { useParams, Link } from "react-router-dom";
 import { CalendarDays, ExternalLink } from "lucide-react";
 import DOMPurify from "dompurify";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://vercel-backend-66m8.onrender.com";
+
 const DocumentDetail = () => {
   const { slug } = useParams();
   const [document, setDocument] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://vercel-backend-66m8.onrender.com/api/admissions/${slug}`)
-      .then((res) => res.json())
-      .then((data) => {
+    if (!slug) {
+      setError("Invalid document request");
+      setLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const fetchDocument = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admissions/${slug}`, {
+          signal: controller.signal,
+        });
+        if (!res.ok) {
+          throw new Error("Document not found");
+        }
+        const data = await res.json();
         if (data && data._id) {
           setDocument(data);
         } else {
           setError("Document not found");
         }
-      })
-      .catch(() => setError("Failed to load document"));
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          setError(err.message || "Failed to load document");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDocument();
+
+    return () => controller.abort();
   }, [slug]);
 
   const formatDate = (dateStr) => {
@@ -26,8 +53,8 @@ const DocumentDetail = () => {
     return isNaN(date) ? null : date.toLocaleDateString("en-GB");
   };
 
+  if (loading) return <div className="text-center mt-8">Loading...</div>;
   if (error) return <div className="text-center text-red-500 mt-8">{error}</div>;
-  if (!document) return <div className="text-center mt-8">Loading...</div>;
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -39,14 +66,18 @@ const DocumentDetail = () => {
         {document.eligibility && <p><strong>Eligibility:</strong> {document.eligibility}</p>}
         {document.ageLimit && <p><strong>Age Limit:</strong> {document.ageLimit}</p>}
         {document.course && <p><strong>Courses:</strong> {document.course}</p>}
-        
+
         {document.applicationFee && (
           <div>
             <strong>Application Fee:</strong>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(document.applicationFee) }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(document.applicationFee || ""),
+              }}
+            />
           </div>
         )}
-        
+
         {document.publishDate && (
           <p className="flex items-center">
             <CalendarDays className="w-4 h-4 mr-1" />
@@ -61,7 +92,9 @@ const DocumentDetail = () => {
           <h2 className="text-lg font-semibold text-blue-600 mb-2">Full Course Details</h2>
           <div
             className="text-sm text-gray-800 prose max-w-none"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(document.fullCourseDetails) }}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(document.fullCourseDetails || ""),
+            }}
           />
         </div>
       )}
@@ -91,8 +124,8 @@ const DocumentDetail = () => {
 
       {/* Back Link */}
       <div className="text-center mt-6">
-        <Link to="/admissions" className="text-blue-600 hover:underline font-medium">
-          ← Back to admissions list
+        <Link to="/admission" className="text-blue-600 hover:underline font-medium">
+          ← Back to admission list
         </Link>
       </div>
     </div>
