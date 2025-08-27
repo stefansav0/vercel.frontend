@@ -23,7 +23,7 @@ import EditJob from "./pages/admin/EditJob";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Header from "./components/Header";
-import AddResult  from "./pages/admin/AddResult";
+import AddResult from "./pages/admin/AddResult";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminAddAdmitCard from "./pages/admin/AdminAddAdmitCard";
 import AdminAddAnswerKey from "./pages/admin/AdminAddAnswerKey";
@@ -32,10 +32,10 @@ import AdminResults from "./pages/admin/AdminResults";
 import AdminAdmissions from "./pages/admin/AdminAdmissions";
 import AdminAnswerKeys from "./pages/admin/AdminAnswerKeys";
 import AdminAdmitCards from "./pages/admin/AdminAdmitCards";
-import Contact from "./pages/Contact"; // ✅ FIXED: Contact component now properly imported
+import Contact from "./pages/Contact";
 import AdminAddDocument from "./pages/admin/AdminAddDocument";
 import AdminDocuments from "./pages/admin/AdminDocuments";
-import CopilotAI from "./components/CopilotAI"; // ✅ Copilot AI Component Imported
+import CopilotAI from "./components/CopilotAI";
 
 // Study News Components
 import AdminAddStudyNews from "./pages/admin/AdminAddStudyNews";
@@ -53,12 +53,15 @@ import AboutUs from "./pages/legal/AboutUs";
 import DocumentDetail from "./pages/DocumentDetail";
 import Document from "./pages/Document";
 
-// Newly added page sections
+// New Sections
 import Result from "./pages/Result";
 import AdmitCard from "./pages/AdmitCard";
 import AnswerKey from "./pages/AnswerKey";
 import Admission from "./pages/Admission";
-import VerifyOtp from "./pages/VerifyOtp"; // ✅ OTP route import
+import VerifyOtp from "./pages/VerifyOtp";
+
+// ✅ Gemini AI Floating Widget
+import AiChatWidget from "./components/AiChatWidget"; // ✅ ADDED
 
 function App() {
   return (
@@ -103,7 +106,7 @@ function App() {
           <Route path="/study-news/:slug" element={<StudyNewsDetail />} />
 
           {/* Documents */}
-          <Route path="/documents" element={<Document />} /> {/* ✅ Added */}
+          <Route path="/documents" element={<Document />} />
           <Route path="/documents/:slug" element={<DocumentDetail />} />
 
           {/* Legal */}
@@ -113,11 +116,10 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
 
           {/* Utility/Support */}
-          <Route path="/contact" element={<Contact />} /> {/* ✅ FIXED Error: Contact not defined */}
-          <Route path="/ai-assistant" element={<CopilotAI />} /> {/* ✅ Updated to match your menu link */}
-          {/* ✅ NEW: Copilot AI Assistant */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/ai-assistant" element={<CopilotAI />} />
 
-          {/* Newly Added Routes */}
+          {/* New Main Pages */}
           <Route path="/result" element={<Result />} />
           <Route path="/admit-card" element={<AdmitCard />} />
           <Route path="/answer-key" element={<AnswerKey />} />
@@ -126,7 +128,7 @@ function App() {
           {/* Auth Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/verify-otp" element={<VerifyOtp />} /> {/* ✅ Updated */}
+          <Route path="/verify-otp" element={<VerifyOtp />} />
           <Route path="/resend-verification" element={<ResendVerification />} />
 
           {/* Protected Routes */}
@@ -134,11 +136,12 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
 
-          {/* Catch-all 404 */}
+          {/* Fallback */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
+      <AiChatWidget /> {/* ✅ ADDED Floating Gemini Chatbot Widget */}
     </div>
   );
 }
