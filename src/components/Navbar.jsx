@@ -50,14 +50,20 @@ const Navbar = () => {
     <header className="bg-white shadow sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <img src="/Logo1.webp" alt="FinderRight Logo" className="h-8 w-8" />
+        <Link to="/" className="flex items-center space-x-2" aria-label="Go to homepage">
+          <img src="/Logo1.webp" alt="Finderight logo" className="h-8 w-8" />
           <span className="text-xl font-bold text-blue-600">Finderight</span>
         </Link>
 
         {/* Hamburger Icon (Mobile) */}
         <div className="md:hidden">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="focus:outline-none"
+          >
             {menuOpen ? (
               <FaTimes className="text-2xl text-gray-700" />
             ) : (
@@ -74,15 +80,25 @@ const Navbar = () => {
 
           {user ? (
             <div className="relative">
-              <FaUserCircle
-                className="text-2xl text-gray-700 cursor-pointer hover:text-blue-600"
+              <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-              />
+                aria-label="User menu"
+                aria-expanded={dropdownOpen}
+                className="text-2xl text-gray-700 hover:text-blue-600 focus:outline-none"
+              >
+                <FaUserCircle />
+              </button>
+
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-md z-50">
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-md z-50"
+                  role="menu"
+                  aria-label="User dropdown"
+                >
                   <Link
                     to="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
+                    role="menuitem"
                     onClick={() => setDropdownOpen(false)}
                   >
                     Profile
@@ -90,6 +106,7 @@ const Navbar = () => {
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    role="menuitem"
                   >
                     Sign Out
                   </button>
@@ -106,7 +123,11 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-start px-4 py-2 md:hidden">
+          <div
+            id="mobile-menu"
+            className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-start px-4 py-2 md:hidden"
+            role="menu"
+          >
             <Link to="/" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Home</Link>
             <Link to="/jobs" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Jobs</Link>
             <Link to="/study-news" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Study News</Link>

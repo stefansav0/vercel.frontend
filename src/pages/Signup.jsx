@@ -22,13 +22,10 @@ const Signup = () => {
     e.preventDefault();
     setError("");
 
-    if (!name.trim()) {
-      return setError("Name is required!");
-    }
-
-    if (password !== confirmPassword) {
-      return setError("Passwords do not match!");
-    }
+    if (!name.trim()) return setError("Name is required!");
+    if (!email.includes("@")) return setError("Enter a valid email address.");
+    if (password.length < 6) return setError("Password must be at least 6 characters.");
+    if (password !== confirmPassword) return setError("Passwords do not match!");
 
     try {
       const response = await fetch(`https://vercel-backend-66m8.onrender.com/api/auth/signup`, {
@@ -43,35 +40,52 @@ const Signup = () => {
       alert("Signup successful! Please check your email for the OTP.");
       navigate("/verify-otp", { state: { email } });
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Signup failed. Please try again.");
     }
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 8 }}>
+    <Container component="main" maxWidth="sm" sx={{ mt: 8 }}>
       <Paper elevation={3} sx={{ p: 4 }}>
-        <Typography variant="h5" align="center" fontWeight="bold" gutterBottom>
+        <Typography
+          variant="h5"
+          align="center"
+          fontWeight="bold"
+          gutterBottom
+          component="h1"
+        >
           Create an Account
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert severity="error" sx={{ mb: 2 }} role="alert" aria-live="assertive">
             {error}
           </Alert>
         )}
 
-        <Box component="form" onSubmit={handleSignup} noValidate autoComplete="off">
+        <Box
+          component="form"
+          onSubmit={handleSignup}
+          noValidate
+          autoComplete="on"
+          aria-label="Signup form"
+        >
           <TextField
+            id="name"
             label="Full Name"
+            name="name"
             fullWidth
             variant="outlined"
             margin="normal"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            autoComplete="name"
           />
           <TextField
-            label="Email"
+            id="email"
+            label="Email Address"
+            name="email"
             type="email"
             fullWidth
             variant="outlined"
@@ -79,9 +93,12 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
           />
           <TextField
+            id="password"
             label="Password"
+            name="password"
             type="password"
             fullWidth
             variant="outlined"
@@ -89,9 +106,12 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="new-password"
           />
           <TextField
+            id="confirmPassword"
             label="Confirm Password"
+            name="confirmPassword"
             type="password"
             fullWidth
             variant="outlined"
@@ -99,13 +119,19 @@ const Signup = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            autoComplete="new-password"
           />
 
           <Button
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 2, py: 1.5, backgroundColor: "green", '&:hover': { backgroundColor: "darkgreen" } }}
+            sx={{
+              mt: 2,
+              py: 1.5,
+              backgroundColor: "green",
+              "&:hover": { backgroundColor: "darkgreen" },
+            }}
           >
             Sign Up
           </Button>
