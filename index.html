@@ -8,10 +8,16 @@
     <meta name="robots" content="index, follow" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="Finderight Team" />
-    <meta name="description" content="Finderight - Find the latest jobs, results, admit cards, and answer keys in one place." />
-    <meta name="keywords" content="jobs, government jobs, results, admit card, answer key, finderight" />
-
-    <title>Finderight</title>
+    <meta
+      name="description"
+      content="Finderight - Your one-stop portal for latest Sarkari jobs, exam results, admit cards, and answer keys in India."
+    />
+    <meta
+      name="keywords"
+      content="jobs, government jobs, results, admit card, answer key, finderight"
+    />
+    <title>Finderight - Latest Jobs, Results, Admit Cards & Answer Keys</title>
+    <link rel="canonical" href="https://finderight.com/" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Logo1.png" />
@@ -21,16 +27,37 @@
 
     <!-- Open Graph for Social Sharing -->
     <meta property="og:title" content="Finderight" />
-    <meta property="og:description" content="Find latest Sarkari jobs, results, admit cards, and answer keys at Finderight." />
-    <meta property="og:image" content="/Logo1.png" />
+    <meta
+      property="og:description"
+      content="Find latest Sarkari jobs, results, admit cards, and answer keys at Finderight."
+    />
+    <meta property="og:image" content="https://finderight.com/Logo1.png" />
     <meta property="og:url" content="https://finderight.com/" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card Meta -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Finderight" />
-    <meta name="twitter:description" content="One-stop portal for job listings, exam results, and more." />
-    <meta name="twitter:image" content="/Logo1.png" />
+    <meta
+      name="twitter:description"
+      content="One-stop portal for job listings, exam results, and more."
+    />
+    <meta name="twitter:image" content="https://finderight.com/Logo1.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Finderight",
+        "url": "https://finderight.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://finderight.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
 
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLZNW3SGL4"></script>
@@ -39,8 +66,8 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-      gtag('config', 'G-SLZNW3SGL4');
+      gtag("js", new Date());
+      gtag("config", "G-SLZNW3SGL4");
     </script>
 
     <!-- Google AdSense -->
@@ -54,15 +81,17 @@
     <style>
       body {
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
-          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: #ffffff;
         color: #1a1a1a;
       }
       code {
-        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
       }
     </style>
   </head>

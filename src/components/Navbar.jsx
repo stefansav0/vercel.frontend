@@ -71,7 +71,6 @@ const Navbar = () => {
           <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
           <Link to="/jobs" className="text-gray-700 hover:text-blue-600">Jobs</Link>
           <Link to="/study-news" className="text-gray-700 hover:text-blue-600">Study News</Link>
-          <Link to="/ai-assistant" className="text-gray-700 hover:text-blue-600">AI Assistant</Link>
 
           {user ? (
             <div className="relative">
@@ -111,7 +110,6 @@ const Navbar = () => {
             <Link to="/" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Home</Link>
             <Link to="/jobs" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Jobs</Link>
             <Link to="/study-news" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>Study News</Link>
-            <Link to="/ai-assistant" className="py-2 text-gray-700 hover:text-blue-600" onClick={() => setMenuOpen(false)}>AI Assistant</Link>
 
             {user ? (
               <>

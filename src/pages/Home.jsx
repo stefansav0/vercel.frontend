@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Briefcase } from "lucide-react";
-import CopilotAI from "../components/CopilotAI"; // ✅ Imported AI Assistant
 
 const Home = () => {
   const [jobListings, setJobListings] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showChatbot, setShowChatbot] = useState(false); // ✅ Chat toggle state
 
   const colors = [
     "bg-gradient-to-r from-blue-600 to-indigo-600",
@@ -129,22 +127,6 @@ const Home = () => {
           <p className="text-center text-gray-500">No jobs found.</p>
         )}
       </section>
-
-      {/* ✅ Floating AI Button and Box */}
-      <div className="fixed bottom-4 right-4 z-50">
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full shadow-lg"
-          onClick={() => setShowChatbot(!showChatbot)}
-        >
-          {showChatbot ? "Close AI" : "Ask AI"}
-        </button>
-      </div>
-
-      {showChatbot && (
-        <div className="fixed bottom-20 right-4 z-50 max-w-md w-full bg-white border rounded-xl shadow-lg">
-          <CopilotAI />
-        </div>
-      )}
     </div>
   );
 };
