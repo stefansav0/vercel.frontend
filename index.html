@@ -19,30 +19,32 @@
     <title>Finderight - Latest Jobs, Results, Admit Cards & Answer Keys</title>
     <link rel="canonical" href="https://finderight.com/" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/Logo1.png" />
+    <!-- Favicon & Logo Preload (WebP preferred) -->
+    <link rel="icon" type="image/webp" href="/Logo1.webp" />
+    <link rel="icon" type="image/png" href="/Logo1.webp" />
+    <link rel="preload" as="image" href="/Logo1.webp" type="image/webp" />
 
-    <!-- Web Manifest (PWA support) -->
+    <!-- Web Manifest (PWA) -->
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Open Graph for Social Sharing -->
+    <!-- Open Graph (Social Sharing) -->
     <meta property="og:title" content="Finderight" />
     <meta
       property="og:description"
       content="Find latest Sarkari jobs, results, admit cards, and answer keys at Finderight."
     />
-    <meta property="og:image" content="https://finderight.com/Logo1.png" />
+    <meta property="og:image" content="https://finderight.com/Logo1.webp" />
     <meta property="og:url" content="https://finderight.com/" />
     <meta property="og:type" content="website" />
 
-    <!-- Twitter Card Meta -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Finderight" />
     <meta
       name="twitter:description"
       content="One-stop portal for job listings, exam results, and more."
     />
-    <meta name="twitter:image" content="https://finderight.com/Logo1.png" />
+    <meta name="twitter:image" content="https://finderight.com/Logo1.webp" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -58,24 +60,6 @@
         }
       }
     </script>
-
-    <!-- Google Analytics (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLZNW3SGL4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-SLZNW3SGL4");
-    </script>
-
-    <!-- Google AdSense -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9348579900264611"
-      crossorigin="anonymous"
-    ></script>
 
     <!-- Global Styles -->
     <style>
@@ -101,5 +85,23 @@
 
     <!-- Main JS Bundle -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLZNW3SGL4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-SLZNW3SGL4");
+    </script>
+
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9348579900264611"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

@@ -51,7 +51,7 @@ const Navbar = () => {
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <img src="/Logo1.png" alt="FinderRight Logo" className="h-8 w-8" />
+          <img src="/Logo1.webp" alt="FinderRight Logo" className="h-8 w-8" />
           <span className="text-xl font-bold text-blue-600">Finderight</span>
         </Link>
 
