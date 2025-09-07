@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Finderight Team" />
+    <meta name="description" content="Finderight - Find the latest jobs, results, admit cards, and answer keys in one place." />
+    <meta name="keywords" content="jobs, government jobs, results, admit card, answer key, finderight" />
+
     <title>Finderight</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Logo1.png" />
+
+    <!-- Web Manifest (PWA support) -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Finderight" />
+    <meta property="og:description" content="Find latest Sarkari jobs, results, admit cards, and answer keys at Finderight." />
+    <meta property="og:image" content="/Logo1.png" />
+    <meta property="og:url" content="https://finderight.com/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Finderight" />
+    <meta name="twitter:description" content="One-stop portal for job listings, exam results, and more." />
+    <meta name="twitter:image" content="/Logo1.png" />
 
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLZNW3SGL4"></script>
@@ -19,9 +43,12 @@
       gtag('config', 'G-SLZNW3SGL4');
     </script>
 
-    <!-- ✅ Google AdSense Verification Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9348579900264611"
-     crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9348579900264611"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Global Styles -->
     <style>
@@ -31,14 +58,19 @@
           'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background-color: #ffffff;
+        color: #1a1a1a;
       }
       code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
       }
     </style>
   </head>
+
   <body>
     <div id="root"></div>
+
+    <!-- Main JS Bundle -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

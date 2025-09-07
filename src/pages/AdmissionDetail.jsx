@@ -3,7 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { CalendarDays, ExternalLink } from "lucide-react";
 import DOMPurify from "dompurify";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://vercel-backend-66m8.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://vercel-backend-66m8.onrender.com";
+
 
 const DocumentDetail = () => {
   const { slug } = useParams();
