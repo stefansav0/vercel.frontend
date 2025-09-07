@@ -51,7 +51,14 @@ const Navbar = () => {
       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2" aria-label="Go to homepage">
-          <img src="/Logo1.webp" alt="Finderight logo" className="h-8 w-8" />
+          <img
+  src="/Logo1.webp"
+  alt="Finderight Logo"
+  width="32"
+  height="32"
+  loading="eager" // for above-the-fold content
+/>
+
           <span className="text-xl font-bold text-blue-600">Finderight</span>
         </Link>
 

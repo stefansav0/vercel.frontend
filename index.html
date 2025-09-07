@@ -19,9 +19,14 @@
     <title>Finderight - Latest Jobs, Results, Admit Cards & Answer Keys</title>
     <link rel="canonical" href="https://finderight.com/" />
 
-    <!-- Favicon & Logo Preload (WebP preferred) -->
+    <!-- Preconnect (improves loading speed) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+
+    <!-- Favicon & Logo Preload -->
     <link rel="icon" type="image/webp" href="/Logo1.webp" />
-    <link rel="icon" type="image/png" href="/Logo1.webp" />
     <link rel="preload" as="image" href="/Logo1.webp" type="image/webp" />
 
     <!-- Web Manifest (PWA) -->
@@ -77,16 +82,24 @@
         font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
           monospace;
       }
+
+      /* Optional CLS fix */
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
     </style>
   </head>
 
-  <body>
-    <div id="root"></div>
+  <body role="main">
+    <!-- Root React App Container -->
+    <div id="root" aria-label="Finderight App"></div>
 
-    <!-- Main JS Bundle -->
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- Main JS Bundle (deferred) -->
+    <script type="module" src="/src/main.jsx" defer></script>
 
-    <!-- Google Analytics (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLZNW3SGL4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
